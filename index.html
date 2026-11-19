@@ -4,110 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>НоНарко | Анонимная помощь</title>
+    
+    <!-- Шрифты: Playfair Display (журнальная эстетика и глубина) + Plus Jakarta Sans (чистая современная геометрия) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Подключаем Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Настройка цветов (наш вайб) -->
+    <!-- Настройка цветов и шрифтов -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        bg: '#F9F8F6',      /* Теплый фон */
-                        dark: '#3E362E',    /* Глубокий коричневый для текста */
-                        primary: '#5A7D7C', /* Шалфейный акцент */
-                        light: '#E8EDE9',   /* Светлый акцент */
-                        text: '#6B635B'     /* Серо-коричневый */
+                        bg: '#F7F5F0',          /* Теплый алебастр */
+                        surface: '#FFFFFF',     /* Чистый белый для карточек */
+                        dark: '#231F1D',        /* Глубокий эспрессо */
+                        primary: '#4A6B69',     /* Благородный шалфей */
+                        primaryDark: '#36504E', /* Глубокий шалфей для ховера */
+                        light: '#E3EAE6',       /* Мягкий мятно-шалфейный */
+                        sand: '#EAE4DA',        /* Теплый песочный */
+                        text: '#5E5751'         /* Мягкий графитово-коричневый */
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'Georgia', 'serif'],
                     }
                 }
             }
         }
     </script>
     
-    <!-- Плавные анимации появления -->
     <style>
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+        html { scroll-behavior: smooth; }
+
+        /* Анимации появления */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+        }
+        .reveal {
+            animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
         }
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
-        
-        /* Плавная прокрутка к якорям */
-        html { scroll-behavior: smooth; }
+        .animate-float { animation: floatSlow 7s ease-in-out infinite; }
+
+        /* Тонкая бумажная текстура на фоне для тактильности */
+        .bg-noise {
+            background-image: radial-gradient(rgba(35, 31, 29, 0.04) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* Стеклянный эффект */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
     </style>
 </head>
-<body class="bg-bg text-dark font-sans antialiased overflow-x-hidden">
+<body class="bg-bg bg-noise text-dark font-sans antialiased overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- ================= ВОЗДУШНАЯ НАВИГАЦИЯ (GLASS HEADER) ================= -->
+    <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto glass-panel rounded-2xl px-5 py-3.5 shadow-[0_8px_30px_rgb(35,31,29,0.04)] flex items-center justify-between">
+            <!-- Логотип -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <span class="w-2.5 h-2.5 rounded-full bg-primary group-hover:scale-125 transition-transform"></span>
+                <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-dark">НоНарко</span>
+            </a>
+
+            <!-- Ссылки (скрыты на мобильных) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-text">
+                <a href="#services" class="hover:text-primary transition-colors">Услуги</a>
+                <a href="#expert" class="hover:text-primary transition-colors">Об эксперте</a>
+                <a href="#contacts" class="hover:text-primary transition-colors">Контакты</a>
+            </nav>
+
+            <!-- Кнопка быстрого действия -->
+            <a href="https://t.me/Antoinette_nonarko" target="_blank" class="inline-flex items-center gap-2 bg-dark hover:bg-primary text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl transition-all duration-300 shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>Написать анонимно</span>
+            </a>
+        </div>
+    </header>
 
     <!-- ================= ГЛАВНЫЙ ЭКРАН (HERO) ================= -->
-    <section class="relative min-h-[90vh] flex items-center pt-20 pb-16 px-6 lg:px-8">
-        <!-- Декоративное пятно на фоне -->
-        <div class="absolute top-0 right-0 -mr-40 -mt-40 w-[600px] h-[600px] bg-light rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+    <section class="relative min-h-screen flex items-center pt-28 pb-16 sm:pt-32 sm:pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <!-- Мягкие органические градиенты на фоне -->
+        <div class="absolute top-10 right-[-10%] w-[500px] h-[500px] bg-light rounded-full blur-[100px] opacity-80 pointer-events-none"></div>
+        <div class="absolute bottom-0 left-[-10%] w-[450px] h-[450px] bg-sand rounded-full blur-[110px] opacity-70 pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-10">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-12 gap-12 lg:gap-10 items-center relative z-10">
             
-            <!-- Левая колонка: Текст и кнопки -->
-            <div class="max-w-2xl">
+            <!-- Левая колонка: Смыслы и призыв к действию (7 колонок) -->
+            <div class="lg:col-span-7 max-w-2xl">
                 <!-- Бейдж -->
-                <div class="animate-fade-in-up inline-flex items-center gap-2 px-4 py-2 rounded-full bg-light text-primary font-medium text-sm mb-6">
+                <div class="reveal inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/80 border border-sand shadow-xs text-primary font-medium text-xs sm:text-sm mb-7">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
                     <span>Анонимно • Бесплатно • Без осуждения</span>
                 </div>
 
                 <!-- Заголовок -->
-                <h1 class="animate-fade-in-up delay-1 text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight mb-6">
-                    Помощь при зависимости <br class="hidden md:block"/>
-                    <span class="text-primary">через доверие</span>
+                <h1 class="reveal delay-1 font-serif text-4xl sm:text-5xl lg:text-[64px] font-semibold leading-[1.08] tracking-tight text-dark mb-6">
+                    Помощь при зависимости <br class="hidden sm:block"/>
+                    <span class="italic font-normal text-primary">через доверие</span>
                 </h1>
 
                 <!-- Подзаголовок -->
-                <p class="animate-fade-in-up delay-2 text-lg md:text-xl text-text mb-8 leading-relaxed max-w-lg">
+                <p class="reveal delay-2 text-base sm:text-lg lg:text-xl text-text mb-9 leading-relaxed max-w-xl">
                     Мы не читаем морали и не ставим на учет. Мы помогаем вам или вашим близким вернуть контроль над жизнью в безопасном пространстве. В Петрозаводске и онлайн.
                 </p>
 
                 <!-- Кнопки -->
-                <div class="animate-fade-in-up delay-3 flex flex-col sm:flex-row gap-4 mb-8">
-                    <!-- ВАЖНО: Замени ссылку ниже на свой Telegram или WhatsApp -->
-                    <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group flex items-center justify-center gap-2 bg-dark hover:bg-black text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 shadow-lg hover:-translate-y-0.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[#A3C6C3] group-hover:text-white"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                        Написать анонимно
+                <div class="reveal delay-3 flex flex-col sm:flex-row gap-4 mb-9">
+                    <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group flex items-center justify-center gap-3 bg-dark hover:bg-primary text-white px-8 py-4 rounded-2xl font-medium transition-all duration-300 shadow-[0_12px_28px_-6px_rgba(35,31,29,0.25)] hover:shadow-[0_16px_32px_-6px_rgba(74,107,105,0.35)] hover:-translate-y-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-light group-hover:scale-110 transition-transform"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                        <span>Написать анонимно</span>
                     </a>
                     
-                    <a href="tel:+78142776304" class="flex items-center justify-center gap-2 bg-white hover:bg-gray-50 text-dark border border-[#E5E0D8] px-8 py-4 rounded-xl font-medium transition-all duration-300 hover:-translate-y-0.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-text"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        Позвонить
+                    <a href="tel:+78142776304" class="group flex items-center justify-center gap-3 bg-white/90 hover:bg-white text-dark border border-sand hover:border-primary/40 px-8 py-4 rounded-2xl font-medium transition-all duration-300 shadow-xs hover:-translate-y-0.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary group-hover:rotate-12 transition-transform"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span>Позвонить</span>
                     </a>
                 </div>
 
                 <!-- Текст безопасности -->
-                <div class="animate-fade-in-up delay-4 flex items-center gap-2 text-sm text-[#8A8279]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                <div class="reveal delay-4 inline-flex items-center gap-2.5 text-sm text-text/80 bg-sand/40 px-4 py-2 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary shrink-0"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
                     <p>Отвечаем в течение 15 минут. Без спама.</p>
                 </div>
             </div>
 
-            <!-- Правая колонка: Фото -->
-            <div class="animate-fade-in-up delay-2 relative lg:ml-auto w-full max-w-md mx-auto lg:max-w-none">
-                <div class="relative rounded-[2rem] overflow-hidden shadow-2xl bg-light">
-                    <!-- ФОТО АННЫ: Замени ссылку в src="..." на реальное фото -->
+            <!-- Правая колонка: Арочный портрет в журнальном стиле (5 колонок) -->
+            <div class="reveal delay-2 lg:col-span-5 relative max-w-md mx-auto lg:max-w-none w-full">
+                <!-- Декоративная рамка позади фото -->
+                <div class="absolute -inset-3 sm:-inset-4 rounded-t-[14rem] rounded-b-[2.5rem] border border-primary/25 pointer-events-none translate-x-2 translate-y-2"></div>
+                
+                <div class="relative rounded-t-[13rem] rounded-b-[2rem] overflow-hidden shadow-[0_24px_50px_-12px_rgba(35,31,29,0.18)] bg-light aspect-[4/5]">
                     <img 
                         src="https://i.postimg.cc/gJn91GGV/k5d-Hs-Yfy9k-E.jpg" 
                         alt="Анна Беляева - консультант" 
-                        class="w-full h-[400px] lg:h-[550px] object-cover object-top"
+                        class="w-full h-full object-cover object-top scale-[1.01] hover:scale-105 transition-transform duration-700"
                     />
-                    <!-- Плашка с именем -->
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
-                        <p class="text-white font-semibold text-xl">Анна Беляева</p>
-                        <p class="text-white/80 text-sm mt-1">Консультант по зависимостям</p>
+                    
+                    <!-- Стеклянная плашка поверх фото -->
+                    <div class="absolute bottom-4 left-4 right-4 glass-panel rounded-2xl p-4 sm:p-5 shadow-lg flex items-center justify-between">
+                        <div>
+                            <p class="font-serif text-dark font-semibold text-lg sm:text-xl leading-tight">Анна Беляева</p>
+                            <p class="text-primary font-medium text-xs sm:text-sm mt-0.5">Консультант по зависимостям</p>
+                        </div>
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" aria-label="Написать в Telegram" class="w-10 h-10 rounded-full bg-dark text-white flex items-center justify-center hover:bg-primary transition-colors shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -115,74 +175,89 @@
         </div>
     </section>
 
-    <!-- ================= БЛОК УСЛУГИ ================= -->
-    <section id="services" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- ================= БЛОК УСЛУГИ (EDITORIAL GRID) ================= -->
+    <section id="services" class="py-24 bg-white relative rounded-t-[2.5rem] sm:rounded-t-[3.5rem] shadow-[0_-10px_40px_rgba(35,31,29,0.03)]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Заголовок блока -->
-            <div class="mb-12 md:flex md:justify-between md:items-end animate-fade-in-up">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end gap-6 mb-14 pb-8 border-b border-sand">
                 <div class="max-w-2xl">
-                    <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Наши услуги</h2>
-                    <p class="text-text text-lg">Все форматы помощи абсолютно бесплатны и анонимны. Выбирайте тот, который комфортен именно вам.</p>
+                    <span class="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-3">Форматы поддержки</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-dark">Наши услуги</h2>
                 </div>
+                <p class="text-text text-base sm:text-lg max-w-md leading-relaxed">
+                    Все форматы помощи абсолютно бесплатны и анонимны. Выбирайте тот, который комфортен именно вам.
+                </p>
             </div>
 
             <!-- Сетка карточек -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7">
                 
                 <!-- Карточка 1: Профилактика -->
-                <div class="group flex flex-col bg-bg rounded-2xl overflow-hidden border border-[#F0EBE1] hover:shadow-xl transition-all duration-300">
-                    <div class="relative h-48 overflow-hidden bg-light">
-                        <!-- Замени картинку при желании -->
-                        <img src="https://i.postimg.cc/7YCKrVQS/o-EHKfe-Sk-JWMka-UIf-Ax-CYp-Fm8PF8u-BPTAU-n-Ou-Pbu1Lijf4Whfj9i21r22675xc0-Aier-V9z-J6Ek-Kl-Qu-Mkcfod.webp" alt="Профилактика" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                <div class="group flex flex-col bg-bg rounded-[1.75rem] p-3 border border-sand/80 hover:border-primary/40 hover:shadow-[0_20px_40px_-15px_rgba(35,31,29,0.1)] hover:-translate-y-1.5 transition-all duration-300">
+                    <div class="relative h-52 rounded-[1.25rem] overflow-hidden bg-light">
+                        <img src="https://i.postimg.cc/7YCKrVQS/o-EHKfe-Sk-JWMka-UIf-Ax-CYp-Fm8PF8u-BPTAU-n-Ou-Pbu1Lijf4Whfj9i21r22675xc0-Aier-V9z-J6Ek-Kl-Qu-Mkcfod.webp" alt="Профилактика" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 glass-panel px-3 py-1 rounded-full text-[11px] font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                        <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-dark/70 backdrop-blur-xs text-white text-xs font-serif flex items-center justify-center">01</div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-lg text-dark mb-2">Профилактика</h3>
-                        <p class="text-sm text-text mb-6 flex-grow">Интерактивные занятия для школ и ВУЗов. Говорим о важном без запугивания.</p>
-                        <a href="https://t.me/Antoinette_nonarko" class="text-center bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-opacity-90 transition-colors">Написать</a>
+                    <div class="p-4 pt-5 flex flex-col flex-grow">
+                        <h3 class="font-serif font-semibold text-xl text-dark mb-2.5">Профилактика</h3>
+                        <p class="text-sm text-text leading-relaxed mb-6 flex-grow">Интерактивные занятия для школ и ВУЗов. Говорим о важном без запугивания.</p>
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group/btn flex items-center justify-between bg-white hover:bg-primary text-dark hover:text-white border border-sand hover:border-primary px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                            <span>Написать</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Карточка 2: Группы помощи -->
-                <div class="group flex flex-col bg-bg rounded-2xl overflow-hidden border border-[#F0EBE1] hover:shadow-xl transition-all duration-300">
-                    <div class="relative h-48 overflow-hidden bg-light">
-                        <!-- Замени картинку при желании -->
-                        <img src="https://i.postimg.cc/4NrBf9rv/G80YJe-Y7QBb12SZPX-P3ZCD-Ra2PGc-YF-b-Ts-F3MP3BZYFel-Oq8lybj-Mud-Aa-N-Z8NQKp-Gsqwf7V7BJnt-Phc-Aar-V.webp" alt="Группы помощи" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                <div class="group flex flex-col bg-bg rounded-[1.75rem] p-3 border border-sand/80 hover:border-primary/40 hover:shadow-[0_20px_40px_-15px_rgba(35,31,29,0.1)] hover:-translate-y-1.5 transition-all duration-300">
+                    <div class="relative h-52 rounded-[1.25rem] overflow-hidden bg-light">
+                        <img src="https://i.postimg.cc/4NrBf9rv/G80YJe-Y7QBb12SZPX-P3ZCD-Ra2PGc-YF-b-Ts-F3MP3BZYFel-Oq8lybj-Mud-Aa-N-Z8NQKp-Gsqwf7V7BJnt-Phc-Aar-V.webp" alt="Группы помощи" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 glass-panel px-3 py-1 rounded-full text-[11px] font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                        <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-dark/70 backdrop-blur-xs text-white text-xs font-serif flex items-center justify-center">02</div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-lg text-dark mb-2">Группы помощи</h3>
-                        <p class="text-sm text-text mb-6 flex-grow">Безопасное пространство, где вас выслушают без осуждения. Ведет опытный психолог.</p>
-                        <a href="https://t.me/Antoinette_nonarko" class="text-center bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-opacity-90 transition-colors">Написать</a>
+                    <div class="p-4 pt-5 flex flex-col flex-grow">
+                        <h3 class="font-serif font-semibold text-xl text-dark mb-2.5">Группы помощи</h3>
+                        <p class="text-sm text-text leading-relaxed mb-6 flex-grow">Безопасное пространство, где вас выслушают без осуждения. Ведет опытный психолог.</p>
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group/btn flex items-center justify-between bg-white hover:bg-primary text-dark hover:text-white border border-sand hover:border-primary px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                            <span>Написать</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Карточка 3: Лекции -->
-                <div class="group flex flex-col bg-bg rounded-2xl overflow-hidden border border-[#F0EBE1] hover:shadow-xl transition-all duration-300">
-                    <div class="relative h-48 overflow-hidden bg-light">
-                        <!-- Замени картинку при желании -->
-                        <img src="https://i.postimg.cc/yNLvq9Np/Rw-GKag1D3-NZED9kt-Vs2KR-7p-ZHid-B-1LRVu-G6Rsldz-BMqj-IRup-n-D7r5l45b-Vxlosw-NOP4f-XIl-Aohfc3n-Sw48s.webp" alt="Лекции" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                <div class="group flex flex-col bg-bg rounded-[1.75rem] p-3 border border-sand/80 hover:border-primary/40 hover:shadow-[0_20px_40px_-15px_rgba(35,31,29,0.1)] hover:-translate-y-1.5 transition-all duration-300">
+                    <div class="relative h-52 rounded-[1.25rem] overflow-hidden bg-light">
+                        <img src="https://i.postimg.cc/yNLvq9Np/Rw-GKag1D3-NZED9kt-Vs2KR-7p-ZHid-B-1LRVu-G6Rsldz-BMqj-IRup-n-D7r5l45b-Vxlosw-NOP4f-XIl-Aohfc3n-Sw48s.webp" alt="Лекции" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 glass-panel px-3 py-1 rounded-full text-[11px] font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                        <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-dark/70 backdrop-blur-xs text-white text-xs font-serif flex items-center justify-center">03</div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-lg text-dark mb-2">Лекции</h3>
-                        <p class="text-sm text-text mb-6 flex-grow">Открытые встречи с экспертами. Разбираем механизмы зависимости и пути выхода.</p>
-                        <a href="https://t.me/Antoinette_nonarko" class="text-center bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-opacity-90 transition-colors">Написать</a>
+                    <div class="p-4 pt-5 flex flex-col flex-grow">
+                        <h3 class="font-serif font-semibold text-xl text-dark mb-2.5">Лекции</h3>
+                        <p class="text-sm text-text leading-relaxed mb-6 flex-grow">Открытые встречи с экспертами. Разбираем механизмы зависимости и пути выхода.</p>
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group/btn flex items-center justify-between bg-white hover:bg-primary text-dark hover:text-white border border-sand hover:border-primary px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                            <span>Написать</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
 
                 <!-- Карточка 4: Консультация -->
-                <div class="group flex flex-col bg-bg rounded-2xl overflow-hidden border border-[#F0EBE1] hover:shadow-xl transition-all duration-300">
-                    <div class="relative h-48 overflow-hidden bg-light">
-                        <!-- Замени картинку при желании -->
-                        <img src="https://i.postimg.cc/QMf0L5Mw/Zp-LX9DNJY4b-Vlz2warws-Mn-Gl-WWy-Vd-Jwvo1r4AUt-K3S9w-GZKt-Ir-Gu-QYcp-MRPB35GJdqfpw-Dmlbj-UKkf-RSo7LG.webp" alt="Консультация" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                <div class="group flex flex-col bg-bg rounded-[1.75rem] p-3 border border-sand/80 hover:border-primary/40 hover:shadow-[0_20px_40px_-15px_rgba(35,31,29,0.1)] hover:-translate-y-1.5 transition-all duration-300">
+                    <div class="relative h-52 rounded-[1.25rem] overflow-hidden bg-light">
+                        <img src="https://i.postimg.cc/QMf0L5Mw/Zp-LX9DNJY4b-Vlz2warws-Mn-Gl-WWy-Vd-Jwvo1r4AUt-K3S9w-GZKt-Ir-Gu-QYcp-MRPB35GJdqfpw-Dmlbj-UKkf-RSo7LG.webp" alt="Консультация" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-3 left-3 glass-panel px-3 py-1 rounded-full text-[11px] font-bold text-primary uppercase tracking-wider">бесплатно</div>
+                        <div class="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-dark/70 backdrop-blur-xs text-white text-xs font-serif flex items-center justify-center">04</div>
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="font-bold text-lg text-dark mb-2">Консультация</h3>
-                        <p class="text-sm text-text mb-6 flex-grow">Индивидуальный разговор с консультантом. Онлайн или лично. Полная конфиденциальность.</p>
-                        <a href="https://t.me/Antoinette_nonarko" class="text-center bg-primary text-white px-4 py-2.5 rounded-lg font-medium hover:bg-opacity-90 transition-colors">Написать</a>
+                    <div class="p-4 pt-5 flex flex-col flex-grow">
+                        <h3 class="font-serif font-semibold text-xl text-dark mb-2.5">Консультация</h3>
+                        <p class="text-sm text-text leading-relaxed mb-6 flex-grow">Индивидуальный разговор с консультантом. Онлайн или лично. Полная конфиденциальность.</p>
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group/btn flex items-center justify-between bg-white hover:bg-primary text-dark hover:text-white border border-sand hover:border-primary px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300">
+                            <span>Написать</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover/btn:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
 
@@ -190,30 +265,42 @@
         </div>
     </section>
 
-    <!-- ================= БЛОК ОБ ЭКСПЕРТЕ ================= -->
-    <section class="py-20 bg-bg">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-[#F0EBE1] flex flex-col md:flex-row">
+    <!-- ================= БЛОК ОБ ЭКСПЕРТЕ (MAGAZINE FEATURE) ================= -->
+    <section id="expert" class="py-24 bg-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-[2.5rem] p-5 sm:p-8 lg:p-12 shadow-[0_20px_60px_-15px_rgba(35,31,29,0.07)] border border-sand grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
-                <!-- Фото -->
-                <div class="md:w-1/3 h-64 md:h-auto bg-light relative">
-                    <!-- ФОТО АННЫ: Замени ссылку в src="..." на реальное фото в костюме -->
-                    <img src="https://i.postimg.cc/K8qxW3xT/Su6-Ra5HXLI.jpg">
+                <!-- Фото (5 колонок) -->
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-[1.75rem] overflow-hidden bg-light aspect-[4/4] sm:aspect-[4/3] lg:aspect-[4/5]">
+                        <img src="https://i.postimg.cc/K8qxW3xT/Su6-Ra5HXLI.jpg" alt="Анна Беляева" class="w-full h-full object-cover object-top">
+                    </div>
                 </div>
                 
-                <!-- Текст -->
-                <div class="md:w-2/3 p-8 md:p-12 flex flex-col justify-center">
-                    <h2 class="text-2xl md:text-3xl font-bold text-dark mb-4">«Главное — начать диалог»</h2>
-                    <p class="text-text text-lg mb-6 leading-relaxed">
-                        Меня зовут Анна. Я знаю, что зависимость — это не слабость характера, а болезнь. И я знаю, как говорить о ней на одном языке — без нотаций, страха и осуждения.
-                    </p>
-                    <p class="text-text text-lg mb-8 leading-relaxed">
-                        В проекте «НоНарко» я помогаю и зависимым, и их близким найти выход. Мы не ставим на учет и не передаем данные. Мы просто помогаем вернуть контроль над жизнью.
-                    </p>
+                <!-- Текст и цитата (7 колонок) -->
+                <div class="lg:col-span-7 flex flex-col justify-center lg:pl-4">
+                    <!-- Декоративная кавычка -->
+                    <div class="w-12 h-12 rounded-2xl bg-light text-primary flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                    </div>
+
+                    <h2 class="font-serif text-3xl sm:text-4xl lg:text-[42px] font-semibold text-dark leading-tight mb-6">
+                        «Главное — начать диалог»
+                    </h2>
                     
-                    <div class="flex items-center gap-4">
-                        <a href="https://t.me/Antoinette_nonarko" class="inline-flex items-center gap-2 bg-dark text-white px-6 py-3 rounded-xl font-medium hover:bg-black transition-colors">
-                            Написать Анне
+                    <div class="space-y-4 text-text text-base sm:text-lg leading-relaxed mb-9">
+                        <p>
+                            Меня зовут Анна. Я знаю, что зависимость — это не слабость характера, а болезнь. И я знаю, как говорить о ней на одном языке — без нотаций, страха и осуждения.
+                        </p>
+                        <p>
+                            В проекте «НоНарко» я помогаю и зависимым, и их близким найти выход. Мы не ставим на учет и не передаем данные. Мы просто помогаем вернуть контроль над жизнью.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-sand/70">
+                        <a href="https://t.me/Antoinette_nonarko" target="_blank" class="group inline-flex items-center gap-3 bg-dark hover:bg-primary text-white px-7 py-4 rounded-2xl font-medium transition-all duration-300 shadow-md hover:-translate-y-0.5">
+                            <span>Написать Анне</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
                     </div>
                 </div>
@@ -222,40 +309,52 @@
     </section>
 
     <!-- ================= ПОДВАЛ (КОНТАКТЫ) ================= -->
-    <footer class="bg-dark text-white py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+    <footer id="contacts" class="bg-dark text-white pt-16 pb-12 rounded-t-[2.5rem] sm:rounded-t-[3.5rem] relative overflow-hidden">
+        <!-- Тонкое свечение сверху -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 pb-12 border-b border-white/10">
+                
+                <!-- Лого/Название -->
+                <div>
+                    <div class="flex items-center gap-2.5 mb-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+                        <p class="font-serif text-3xl font-bold tracking-tight">НоНарко</p>
+                    </div>
+                    <p class="text-white/60 text-sm sm:text-base">Анонимная помощь при зависимостях</p>
+                </div>
+
+                <!-- Контакты -->
+                <div class="space-y-3 text-white/80 text-sm sm:text-base">
+                    <p class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-light shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </span>
+                        <span>г. Петрозаводск, Лососинское шоссе, 7</span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <span class="w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center text-light shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </span>
+                        <a href="tel:+78142776304" class="hover:text-white transition-colors font-medium">+7 (8142) 77-63-04</a>
+                    </p>
+                </div>
+
+                <!-- Соцсети -->
+                <div class="flex gap-3">
+                    <a href="https://vk.com/nonarkoinfo" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 hover:bg-primary border border-white/10 hover:border-primary flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="ВКонтакте">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.814-.18-1.272-.226-1.761-.226-1.236 0-2.457.302-3.29 1.115-.652.635-1.112 1.78-.61 1.857.688.107 1.279.398 1.511 1.288.295 1.128.167 3.668-.212 4.681-.5 1.333-2.432-1.707-3.313-3.57-.593-1.253-.946-2.326-2.25-2.326H1.288c-.872 0-1.032.438-.814 1.083 1.666 4.847 5.147 9.446 10.973 9.446h1.715z"/></svg>
+                    </a>
+                    <a href="https://t.me/Antoinette_nonarko/" target="_blank" class="w-12 h-12 rounded-2xl bg-white/5 hover:bg-primary border border-white/10 hover:border-primary flex items-center justify-center transition-all duration-300 hover:-translate-y-0.5" aria-label="Telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    </a>
+                </div>
+            </div>
             
-            <!-- Лого/Название -->
-            <div class="text-center md:text-left">
-                <p class="text-2xl font-bold tracking-wider mb-2">НоНарко</p>
-                <p class="text-gray-400 text-sm">Анонимная помощь при зависимостях</p>
+            <div class="pt-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 text-xs sm:text-sm text-white/40">
+                <p>&copy; 2024 НоНарко. Консультации о зависимости. Все права защищены.</p>
             </div>
-
-            <!-- Контакты -->
-            <div class="text-center md:text-left space-y-2 text-gray-300">
-                <p class="flex items-center justify-center md:justify-start gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                    г. Петрозаводск, Лососинское шоссе, 7
-                </p>
-                <p class="flex items-center justify-center md:justify-start gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    <a href="tel:+78142776304" class="hover:text-white transition-colors">+7 (8142) 77-63-04</a>
-                </p>
-            </div>
-
-            <!-- Кнопка наверх / Соцсети -->
-            <div class="flex gap-4">
-                <a href="https://vk.com/nonarkoinfo" target="_blank" class="bg-gray-800 hover:bg-primary p-3 rounded-full transition-colors" aria-label="ВКонтакте">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.814-.18-1.272-.226-1.761-.226-1.236 0-2.457.302-3.29 1.115-.652.635-1.112 1.78-.61 1.857.688.107 1.279.398 1.511 1.288.295 1.128.167 3.668-.212 4.681-.5 1.333-2.432-1.707-3.313-3.57-.593-1.253-.946-2.326-2.25-2.326H1.288c-.872 0-1.032.438-.814 1.083 1.666 4.847 5.147 9.446 10.973 9.446h1.715z"/></svg>
-                </a>
-                <a href="https://t.me/Antoinette_nonarko/" target="_blank" class="bg-gray-800 hover:bg-primary p-3 rounded-full transition-colors" aria-label="Telegram">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                </a>
-            </div>
-        </div>
-        
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-            <p>&copy; 2024 НоНарко. Консультации о зависимости. Все права защищены.</p>
         </div>
     </footer>
 
