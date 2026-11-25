@@ -87,6 +87,35 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
+   /* Стили для кнопки копирования */
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: #F7F5F0;
+    color: #5E5751;
+    border: 1px solid #EAE4DA;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.copy-btn:hover {
+    background: #E3EAE6;
+    color: #4A6B69;
+    border-color: #4A6B69;
+}
+.copy-btn svg {
+    width: 16px;
+    height: 16px;
+}
+.copy-btn.copied {
+    background: #4A6B69;
+    color: white;
+    border-color: #4A6B69;
+} 
     </style>
     <script type="application/ld+json">
     {
@@ -704,5 +733,25 @@
         </div>
     </footer>
 
+    <script>
+        function copyText(btnElement) {
+            const textContainer = btnElement.closest('.bg-white').querySelector('.phrase-text');
+            const textToCopy = textContainer.innerText;
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalHTML = btnElement.innerHTML;
+                btnElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>';
+                btnElement.classList.add('copied');
+
+                setTimeout(() => {
+                    btnElement.innerHTML = originalHTML;
+                    btnElement.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('Ошибка копирования: ', err);
+            });
+        }
+    </script>
 </body>
+</html></body>
 </html>
