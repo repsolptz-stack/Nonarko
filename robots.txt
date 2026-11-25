@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://repsolptz-stack.github.io/ТВОЙ-РЕПОЗИТОРИЙ/sitemap.xml
