@@ -363,6 +363,235 @@
             </div>
         </div>
     </section>
+<!-- ================= ТЕСТ И ПАМЯТКИ ДЛЯ БЛИЗКИХ ================= -->
+<section id="caregiver-tools" class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-4xl mx-auto">
+        <!-- Заголовок секции -->
+        <div class="mb-8">
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-2.5">Поддержка близких</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-dark">Тест и памятки для близких</h2>
+        </div>
+
+        <!-- Переключатель вкладок -->
+        <div class="grid grid-cols-2 gap-2.5 bg-sand/60 p-1.5 rounded-2xl mb-6 border border-sand">
+            <button
+                type="button"
+                id="tab-btn-test"
+                onclick="switchCaregiverTab('test')"
+                class="py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 bg-dark text-white shadow-xs"
+            >
+                Экспресс-тест (6)
+            </button>
+            <button
+                type="button"
+                id="tab-btn-phrases"
+                onclick="switchCaregiverTab('phrases')"
+                class="py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 text-dark/80 hover:text-dark bg-transparent"
+            >
+                Фразы и памятки
+            </button>
+        </div>
+
+        <!-- ВКЛАДКА 1: ЭКСПРЕСС-ТЕСТ -->
+        <div id="tab-panel-test" class="space-y-4">
+            <!-- Вопрос 1 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    1. Близкий отрицает проблему и раздражается при попытке поговорить?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="1">
+                    <button type="button" onclick="selectAnswer(1, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(1, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(1, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 2 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    2. Замечаете пропажу денег, долги или просьбы перехватить до зарплаты?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="2">
+                    <button type="button" onclick="selectAnswer(2, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(2, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(2, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    3. Проверяете телефон, состояние или контролируете возвращение домой?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="3">
+                    <button type="button" onclick="selectAnswer(3, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(3, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(3, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 4 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    4. Прикрываете близкого перед родными, работой или знакомыми?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="4">
+                    <button type="button" onclick="selectAnswer(4, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(4, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(4, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 5 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    5. Ваше собственное настроение и сон зависят от того, как ведёт себя близкий?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="5">
+                    <button type="button" onclick="selectAnswer(5, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(5, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(5, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Вопрос 6 -->
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <p class="font-semibold text-dark text-base sm:text-lg mb-4">
+                    6. Чувствуете усталость, вину или бессилие, но не знаете, с чего начать помощь?
+                </p>
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-3" data-q="6">
+                    <button type="button" onclick="selectAnswer(6, 0, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Никогда</button>
+                    <button type="button" onclick="selectAnswer(6, 1, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Иногда</button>
+                    <button type="button" onclick="selectAnswer(6, 2, this)" class="quiz-opt py-2.5 px-3 rounded-xl border border-sand bg-bg/60 hover:border-primary text-xs sm:text-sm font-medium text-dark transition-all">Часто</button>
+                </div>
+            </div>
+
+            <!-- Блок результата теста -->
+            <div id="quiz-result" class="bg-light/80 border border-primary/25 rounded-[1.75rem] p-6 sm:p-7">
+                <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary mb-2">Ориентир по состоянию</p>
+                <h3 id="quiz-result-title" class="font-serif text-xl sm:text-2xl font-semibold text-dark mb-2.5">
+                    Отметьте ответы выше, чтобы увидеть подсказку
+                </h3>
+                <p id="quiz-result-text" class="text-sm sm:text-base text-text leading-relaxed mb-5">
+                    Тест не ставит диагнозов — он помогает увидеть, насколько сильно ситуация уже забирает ваш ресурс, и подобрать спокойный первый шаг.
+                </p>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                    <a href="https://t.me/Antoinette_nonarko?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BF%D1%80%D0%BE%D1%88%D0%B5%D0%BB%20%D1%82%D0%B5%D1%81%D1%82%20%D0%B4%D0%BB%D1%8F%20%D0%B1%D0%BB%D0%B8%D0%B7%D0%BA%D0%B8%D1%85%20%D0%B8%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B0%D0%BD%D0%BE%D0%BD%D0%B8%D0%BC%D0%BD%D0%BE%20%D0%BF%D0%BE%D1%81%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%D0%B0%D1%82%D1%8C%D1%81%D1%8F." target="_blank" class="inline-flex items-center justify-center gap-2 bg-dark hover:bg-primary text-white px-6 py-3.5 rounded-2xl text-sm font-medium transition-all">
+                        <span>Написать Анне анонимно</span>
+                        <span>→</span>
+                    </a>
+                    <button type="button" onclick="resetQuiz()" class="px-5 py-3.5 rounded-2xl text-sm font-medium text-dark/80 hover:text-dark bg-white/80 border border-sand transition-all">
+                        Сбросить ответы
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ВКЛАДКА 2: ФРАЗЫ И ПАМЯТКИ -->
+        <div id="tab-panel-phrases" class="hidden space-y-4">
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <span class="inline-block text-xs font-semibold text-primary bg-light px-3 py-1 rounded-full mb-3">Как начать разговор</span>
+                <p class="font-serif text-lg sm:text-xl font-semibold text-dark mb-2">«Я вижу, что тебе сейчас непросто, и хочу поддержать»</p>
+                <p class="text-sm text-text leading-relaxed">
+                    Говорите от своего лица, без обвинений и ярлыков. Упрёки обычно включают защиту и закрывают диалог.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <span class="inline-block text-xs font-semibold text-primary bg-light px-3 py-1 rounded-full mb-3">Бережные границы</span>
+                <p class="font-serif text-lg sm:text-xl font-semibold text-dark mb-2">«Я рядом с тобой, но не буду покрывать долги и проблемы»</p>
+                <p class="text-sm text-text leading-relaxed">
+                    Спокойные границы защищают вас от истощения и не усиливают зависимость через «спасательство».
+                </p>
+            </div>
+
+            <div class="bg-white rounded-[1.5rem] p-5 sm:p-6 border border-sand shadow-xs">
+                <span class="inline-block text-xs font-semibold text-primary bg-light px-3 py-1 rounded-full mb-3">Памятка для близких</span>
+                <p class="font-serif text-lg sm:text-xl font-semibold text-dark mb-2">Вы не обязаны справиться в одиночку</p>
+                <p class="text-sm text-text leading-relaxed mb-4">
+                    Сначала позаботьтесь о своём состоянии и ясности шагов — так вы сможете помочь гораздо надёжнее.
+                </p>
+                <a href="https://t.me/Antoinette_nonarko" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline">
+                    <span>Обсудить ситуацию с консультантом</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const quizAnswers = {};
+
+    function switchCaregiverTab(tab) {
+        const testPanel = document.getElementById('tab-panel-test');
+        const phrasesPanel = document.getElementById('tab-panel-phrases');
+        const btnTest = document.getElementById('tab-btn-test');
+        const btnPhrases = document.getElementById('tab-btn-phrases');
+
+        if (tab === 'test') {
+            testPanel.classList.remove('hidden');
+            phrasesPanel.classList.add('hidden');
+            btnTest.className = 'py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 bg-dark text-white shadow-xs';
+            btnPhrases.className = 'py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 text-dark/80 hover:text-dark bg-transparent';
+        } else {
+            phrasesPanel.classList.remove('hidden');
+            testPanel.classList.add('hidden');
+            btnPhrases.className = 'py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 bg-dark text-white shadow-xs';
+            btnTest.className = 'py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 text-dark/80 hover:text-dark bg-transparent';
+        }
+    }
+
+    function selectAnswer(questionNum, score, btnEl) {
+        quizAnswers[questionNum] = score;
+
+        const group = document.querySelector(`[data-q="${questionNum}"]`);
+        if (group) {
+            group.querySelectorAll('.quiz-opt').forEach(btn => {
+                btn.classList.remove('bg-dark', 'text-white', 'border-dark');
+                btn.classList.add('bg-bg/60', 'text-dark', 'border-sand');
+            });
+        }
+
+        btnEl.classList.remove('bg-bg/60', 'text-dark', 'border-sand');
+        btnEl.classList.add('bg-dark', 'text-white', 'border-dark');
+
+        renderQuizResult();
+    }
+
+    function renderQuizResult() {
+        const answeredCount = Object.keys(quizAnswers).length;
+        const totalScore = Object.values(quizAnswers).reduce((sum, v) => sum + v, 0);
+        const titleEl = document.getElementById('quiz-result-title');
+        const textEl = document.getElementById('quiz-result-text');
+
+        if (answeredCount === 0) {
+            titleEl.textContent = 'Отметьте ответы выше, чтобы увидеть подсказку';
+            textEl.textContent = 'Тест не ставит диагнозов — он помогает увидеть, насколько сильно ситуация уже забирает ваш ресурс, и подобрать спокойный первый шаг.';
+            return;
+        }
+
+        if (totalScore <= 4) {
+            titleEl.textContent = 'Напряжение пока умеренное — самое время наметить опору';
+            textEl.textContent = 'Некоторые сигналы уже заметны, но у вас есть возможность спокойно разобраться в происходящем до того, как ситуация станет критичной. Можно задать вопрос консультанту анонимно.';
+        } else if (totalScore <= 8) {
+            titleEl.textContent = 'Ситуация уже заметно влияет на вас и семью';
+            textEl.textContent = 'Похоже, вы тратите много сил на контроль, переживания или сглаживание конфликтов. Спокойный разговор со специалистом поможет выстроить границы и понять, с чего начать.';
+        } else {
+            titleEl.textContent = 'Высокий уровень напряжения — вам нужна поддержка уже сейчас';
+            textEl.textContent = 'По ответам видно, что ситуация сильно выматывает вас. Не обязательно тянуть это в одиночку — напишите или позвоните, чтобы анонимно обсудить безопасные шаги.';
+        }
+    }
+
+    function resetQuiz() {
+        Object.keys(quizAnswers).forEach(k => delete quizAnswers[k]);
+        document.querySelectorAll('.quiz-opt').forEach(btn => {
+            btn.classList.remove('bg-dark', 'text-white', 'border-dark');
+            btn.classList.add('bg-bg/60', 'text-dark', 'border-sand');
+        });
+        renderQuizResult();
+    }
+</script>
 
     <!-- ================= БЛОК ОБ ЭКСПЕРТЕ (MAGAZINE FEATURE) ================= -->
     <section id="expert" class="py-20 sm:py-24 bg-bg relative">
